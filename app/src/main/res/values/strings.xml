@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ContactNotes</string>
+    <string name="add_new_item">Add new note</string>
+    <string name="error_input_count">Error Input Count</string>
+    <string name="error_input_name">Error Input Name</string>
+    <string name="note">Note:</string>
+    <string name="save">Save</string>
+    <string name="note_label">Note</string>
+</resources>
