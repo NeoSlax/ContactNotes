@@ -1,14 +1,12 @@
 package ru.eltech.contactnotes.presentation
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import ru.eltech.contactnotes.databinding.ActivityMainBinding
-import ru.eltech.contactnotes.di.DaggerApplicationComponent
 import ru.eltech.contactnotes.presentation.adapters.NoteListAdapter
 import javax.inject.Inject
 
@@ -35,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
+        setupReloadBtn()
         viewModel.contactNoteList.observe(this) {
             adapter.submitList(it)
         }
@@ -76,6 +75,13 @@ class MainActivity : AppCompatActivity() {
         adapter.onItemClickListener = {
             val intent = EditItemActivity.newIntentEditItem(this, it.id)
             startActivity(intent)
+        }
+    }
+
+    private fun setupReloadBtn() {
+        binding.btnUpdate.setOnClickListener {
+            readContacts()
+            Toast.makeText(this, "Contacts reloaded", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -2,11 +2,14 @@ package ru.eltech.contactnotes.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Relation
 
-@Entity(tableName = "contact_note_list")
 data class NoteItemDbModel(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int,
-    val name: String,
-    val note: String
+    val id: Int,
+    val contactName: String,
+    @Relation(
+        parentColumn = "id", entityColumn = "id", entity = NotesDbModel::class, projection =
+        ["note"]
+    )
+    val note: String? = null
 )

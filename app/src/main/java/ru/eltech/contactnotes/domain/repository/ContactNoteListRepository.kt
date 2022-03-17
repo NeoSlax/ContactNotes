@@ -5,11 +5,9 @@ import ru.eltech.contactnotes.domain.entities.ContactNoteItem
 
 interface ContactNoteListRepository {
 
+    suspend fun syncContactList()
+
     suspend fun addNoteItem(item: ContactNoteItem)
-
-    suspend fun deleteNoteItem(contactNoteItem: ContactNoteItem)
-
-    suspend fun editNoteItem(contactNoteItem: ContactNoteItem)
 
     suspend fun getNoteItem(id: Int): ContactNoteItem
 

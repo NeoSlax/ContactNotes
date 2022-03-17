@@ -7,15 +7,18 @@ import ru.eltech.contactnotes.data.database.NoteItemDbModel
 @Dao
 interface NoteListDao {
 
-    @Query("SELECT * FROM contact_note_list")
+    @Query("SELECT * FROM contacts_table")
     fun getNoteList(): LiveData<List<NoteItemDbModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNoteItem(noteItem: NoteItemDbModel)
+    suspend fun insertNoteItem(noteItem: NotesDbModel)
 
-    @Query(" DELETE FROM contact_note_list WHERE id=:noteItemId")
-    suspend fun deleteNoteItem(noteItemId: Int)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertContactItem(contactItem: ContactsDbModel)
 
-    @Query("SELECT * FROM contact_note_list WHERE id=:noteItemId LIMIT 1")
+    @Query(" DELETE FROM contacts_table")
+    suspend fun deleteContactsListTable()
+
+    @Query("SELECT * FROM contacts_table WHERE id=:noteItemId LIMIT 1")
     suspend fun getNoteItem(noteItemId: Int): NoteItemDbModel
 }

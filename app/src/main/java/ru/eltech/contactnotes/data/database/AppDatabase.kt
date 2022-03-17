@@ -5,7 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [NoteItemDbModel::class], version = 1, exportSchema = false)
+@Database(
+    entities = [ContactsDbModel::class,
+        NotesDbModel::class
+    ],
+    version = 2, exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun shopListDao(): NoteListDao
@@ -28,7 +33,8 @@ abstract class AppDatabase : RoomDatabase() {
                     application,
                     AppDatabase::class.java,
                     DB_NAME
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = db
                 return db
             }
